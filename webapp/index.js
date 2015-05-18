@@ -1,4 +1,4 @@
-var results = new ResultCollection([
+var results = new ResultCollection(/*[
 	{
 		'id': 1,
 		'candidate': 'Komor',
@@ -14,7 +14,7 @@ var results = new ResultCollection([
 		'candidate': 'Chuck',
 		'value': 101
 	}
-]);
+]*/);
 
 var mainView = new WebappMainView({
 

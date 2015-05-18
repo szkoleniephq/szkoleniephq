@@ -1,13 +1,12 @@
 module.exports = function(io, db, events) {
 
-	var getVotes = function(callback) {
-		db.getCandidates().then(function(candidates) {
-			candidates.forEach
-		})
-	}
-
 	io.on('connection', function(socket) {
 		console.log('client connected')
+
+		db.getCandidates().then(function(candidates) {
+			console.log('result-sync', candidates);
+			socket.emit('result-sync', candidates);
+		})
 	});
 
 	events.on('candidatesLoaded', function() {
@@ -18,7 +17,7 @@ module.exports = function(io, db, events) {
 		})
 	});
 
-	events.on('newVote', function() {
+	events.on('result-sync', function() {
 		db.getCandidates().then(function(candidates) {
 			console.log('result-sync', candidates);
 			io.sockets.emit('result-sync', candidates);
