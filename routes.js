@@ -1,10 +1,10 @@
-module.exports = function(app) {
+module.exports = function(app, db, events) {
 
-	var db = require('./database');
+
 
 
 	app.get('/', function(request, response) {
-		response.send("BUM tsss!");
+		response.res.sendFile(__dirname + '/index.html');
 	});
 
 	app.get('/constituencies', function(request, response) {
@@ -14,18 +14,19 @@ module.exports = function(app) {
 	});
 
 	app.get('/candidates', function(request, response) {
-		//var constituencyId = request.params.constituencyId;
 		db.getCandidates().then(function(candidates) {
 			response.json(candidates);
 		})
 	});
 
 	app.post('/saveResult', function(request, response) {
-		var constituencyId = request.params.constituencyId;
-		var constituenceResult = request.params.constituenceResult;
-		db.saveConstituenceResult().then(function(result) {
+		var candidateResult = request.params.candidateResult;
+		db.saveConstituenceResult(constituencyId, constituenceResult).then(function(result) {
 			response.json(result);
 		});
+
+		//notify all clients about new vote
+		events.emit('newVote');
 	});
 
 };
