@@ -58,7 +58,8 @@ module.exports = {
     storeVotes: function(votes) {
         var defered = q.defer();
         db_promise.promise.then(function(db) {
-            for (var idx = 0; idx < votes.length; idx++) {
+            for (var _idx = 0; _idx < votes.length; _idx++) {
+                var inx = _idx;
                 var vote = votes[idx];
                 console.log("Vote: ", vote);
                 db.collection('constituencies').find({
