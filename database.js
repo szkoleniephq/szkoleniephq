@@ -56,7 +56,8 @@ module.exports = {
 	},
 
 	storeVotes: function(votes) {
-		var defered = q.defer();
+		var defered_all = q.defer();
+		var promises = [];		
 		db_promise.promise.then(function(db) {
 			for (var _idx = 0; _idx < votes.length; _idx++) {
 				var vote = votes[_idx];
@@ -65,6 +66,8 @@ module.exports = {
 					_id: ObjectID(vote.constituencyId)
 				}).count((function(){
 					var vote = votes[_idx];
+					var defered = q.defer();
+					promises.push(defered);
 					return function(err, count) {
 					console.log("Count: ", _idx, count);
 					console.log("Vote: ", vote);
@@ -85,12 +88,14 @@ module.exports = {
 							result: vote.votes
 						}
 					});
+					defered.resolve();
 				}})());
 			}
-			defered.resolve();
-			console.log("OK");
 		});
-		return defered.promise;
+		q.all(promises).done(function(){
+			defered_all.resolve();
+		});		
+		return defered_all.promise;
 	},
 
 	getDb: function() {
