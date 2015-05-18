@@ -36,11 +36,13 @@ module.exports = {
         });
         return defered.promise;
     },
+
     getCandidates: function() {
         var defered = q.defer();
         db_promise.promise.then(function(db) {
             db.collection('candidates').find({}, {
-                //name: true
+                name: true,
+                result: true,
             }).toArray(function(err, data) {
                 if (err) {
                     console.log('error', err);
@@ -54,6 +56,7 @@ module.exports = {
     },
 
     storeVotes: function(votes) {
+        var defered = q.defer();
         db_promise.promise.then(function(db) {
             for (var idx = 0; idx < votes.length; idx++) {
                 var vote = votes[idx];
@@ -78,10 +81,12 @@ module.exports = {
                     });
                 });
             }
+            defered.resolve();
         });
+        return defered.promise;
     },
 
     getDb: function() {
-        return db_promise;
+        return db_promise.promise;
     }
 };
