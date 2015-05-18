@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-	var db = require('./db');
+	var db = require('./database');
 
 
 	app.get('/', function(request, response) {
@@ -8,14 +8,14 @@ module.exports = function(app) {
 	});
 
 	app.get('/constituencies', function(request, response) {
-		db.loadConstituencies().then(function(constituencies) {
+		db.getConstituencies().then(function(constituencies) {
 			response.json(constituencies);
 		})
 	});
 
 	app.get('/candidates', function(request, response) {
-		var constituencyId = request.params.constituencyId;
-		db.loadCcandidates(constituencyId).then(function(candidates) {
+		//var constituencyId = request.params.constituencyId;
+		db.getCandidates().then(function(candidates) {
 			response.json(candidates);
 		})
 	});
