@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap-theme.min.css" />
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="img/insect.png" type="image/x-icon" />
     </head>
     <body>
 
@@ -33,8 +34,9 @@
             </script>
     
             <script id="candidatesListTpl" type="text/template">
-                <h1>Lista kandydatów dla okręgu: <%= constituency %></h1>
-                <table>
+                <h1>Lista kandydatów dla okręgu:</h1>
+				<h2><%= constituency %></h2>
+                <table class="table">
                     <tr>
                         <th>Kandydat</th>
                         <th>Głosy</th>
