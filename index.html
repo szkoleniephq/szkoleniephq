@@ -12,6 +12,9 @@
   var socket = io.connect('http://localhost:5000');
   
   
+  socket.on('result-sync', function(result){
+  	console.log('result-sync', result);
+  })
 </script>
 
 </body>
