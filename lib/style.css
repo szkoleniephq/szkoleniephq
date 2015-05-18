@@ -1,0 +1,12 @@
+/* Michal style's */
+.column{
+  height: 300px;
+  width: 100px;
+  margin: 0 auto;
+  background: rgb(242, 242, 242)
+}
+
+.column .result{
+  width: 100%;
+  background: #fff;
+}

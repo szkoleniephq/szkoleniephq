@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../lib/style.css" />
     </head>
     <body>
 
@@ -31,6 +31,9 @@
             <div id="chart">
                 <% _.forEach(data, function(model) { %>
                 <div class="col-sm-4 text-center">
+                  <div class="column">
+                    <div class="result" style="height: <%= 300-model.percent*3 %>px"></div>
+                  </div>
         					<h2><%= model.candidate %> </h2>
                   <h3 class="text-muted" data-percent="<%= model.percent %>"><%= model.value %> </h3>
         				</div>
