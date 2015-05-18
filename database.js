@@ -59,13 +59,15 @@ module.exports = {
 		var defered = q.defer();
 		db_promise.promise.then(function(db) {
 			for (var _idx = 0; _idx < votes.length; _idx++) {
-				var idx = _idx;
-				var vote = votes[idx];
+				var vote = votes[_idx];
 				console.log("Vote: ", vote);
 				db.collection('constituencies').find({
 					_id: ObjectID(vote.constituencyId)
-				}).count(function(err, count) {
-					console.log("Count: ", count);
+				}).count((function(){
+					var vote = votes[_idx];
+					return function(err, count) {
+					console.log("Count: ", _idx, count);
+					console.log("Vote: ", vote);
 					if (err || !count) {
 						defered.resolve();
 						return;
@@ -83,7 +85,7 @@ module.exports = {
 							result: vote.votes
 						}
 					});
-				});
+				}})());
 			}
 			defered.resolve();
 			console.log("OK");
