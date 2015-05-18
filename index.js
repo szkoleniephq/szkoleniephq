@@ -8,6 +8,7 @@ var EventEmitter = require("events").EventEmitter;
 
 app.use('/webapp', express.static(__dirname + '/webapp'));
 app.use('/mobile', express.static(__dirname + '/mobile'));
+app.use('/lib', express.static(__dirname + '/lib'));
 
 var MongoClient = require('mongodb').MongoClient;
 app.set('port', (process.env.PORT || 5000));
