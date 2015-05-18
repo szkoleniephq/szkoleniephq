@@ -22,3 +22,5 @@ var mainView = new WebappMainView({
 	el: $('#webapp-container')
 
 });
+
+mainView.render();
