@@ -12,9 +12,49 @@
     </head>
     <body>
 
-		<div id="mobile-container"></div>
+        <div id="webapp-container"></div>
 
-        <script type="text/javascript" src="../lib/yepnope.js"></script>
-    	<script type="text/javascript" src="index.js"></script>
+        <!-- templates -->
+        <script id="okregiSelectTpl" type="text/template">
+            <label for="okregiSelect">Wybierz okręg</label>
+            <select id="okregiSelect">
+                <option value="0">-- wybierz --</option>
+                <% _.forEach(data, function(model) { %>
+                <option value="<%= model.id %>"><%= model.name %></option>
+                <% }); %>
+            </select>
+
+            <div id="candidatesListContainer"></div>
+        </script>
+
+        <script id="candidatesListTpl" type="text/template">
+            <h1>Lista kandydatów dla okręgu: <%= constituency %></h1>
+            <table>
+                <tr>
+                    <th>Kandydat</th>
+                    <th>Głosy</th>
+                </tr>
+                <% _.forEach(data, function(model) { %>
+                <tr>
+                    <td><%= model.name %></td>
+                    <td><input type="number"></td>
+                </tr>
+                <% }); %>
+            </table>
+        </script>
+
+        <script type="text/javascript" src="../lib/jquery.js"></script>
+        <script type="text/javascript" src="../lib/underscore-min.js"></script>
+        <script type="text/javascript" src="../lib/backbone-min.js"></script>
+
+        <script type="text/javascript" src="../lib/models/Candidate.js"></script>
+        <script type="text/javascript" src="../lib/collections/CandidateCollection.js"></script>
+
+        <script type="text/javascript" src="../lib/models/Constituency.js"></script>
+        <script type="text/javascript" src="../lib/collections/ConstituencyCollection.js"></script>
+        <script type="text/javascript" src="../lib/views/MobileMainView.js"></script>
+
+        <script type="text/javascript" src="index.js"></script>
+
     </body>
 </html>
