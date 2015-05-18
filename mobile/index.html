@@ -24,7 +24,7 @@
             <select id="okregiSelect">
                 <option value="0">-- wybierz --</option>
                 <% _.forEach(data, function(model) { %>
-                <option value="<%= model.id %>"><%= model.name %></option>
+                <option value="<%= model._id %>"><%= model.name %></option>
                 <% }); %>
             </select>
 
@@ -41,10 +41,12 @@
                 <% _.forEach(data, function(model) { %>
                 <tr>
                     <td><%= model.name %></td>
-                    <td><input type="number"></td>
+                    <td><input class="candidate-input" id="<%= model._id %>" type="number"></td>
                 </tr>
                 <% }); %>
             </table>
+
+            <button class="js-save-votes">Zapisz głosy</button>
         </script>
 
         <script type="text/javascript" src="/lib/jquery.js"></script>
@@ -58,6 +60,9 @@
         <script type="text/javascript" src="/lib/models/Constituency.js"></script>
         <script type="text/javascript" src="/lib/collections/ConstituencyCollection.js"></script>
         <script type="text/javascript" src="/lib/views/MobileMainView.js"></script>
+
+        <script type="text/javascript" src="/lib/models/Votes.js"></script>
+        <script type="text/javascript" src="/lib/collections/VotesCollection.js"></script>
 
         <script type="text/javascript" src="index.js"></script>
 
