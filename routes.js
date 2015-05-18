@@ -1,10 +1,7 @@
 module.exports = function(app, db, events) {
 
-
-
-
 	app.get('/', function(request, response) {
-		response.res.sendFile(__dirname + '/index.html');
+		response.sendFile(__dirname + '/index.html');
 	});
 
 	app.get('/constituencies', function(request, response) {
@@ -17,16 +14,18 @@ module.exports = function(app, db, events) {
 		db.getCandidates().then(function(candidates) {
 			response.json(candidates);
 		})
+
+		events.emit('candidatesLoaded');
 	});
 
 	app.post('/saveResult', function(request, response) {
-		var candidateResult = request.params.candidateResult;
-		db.saveConstituenceResult(constituencyId, constituenceResult).then(function(result) {
-			response.json(result);
-		});
+		var votingResult = request.params.votingResult;
+		db.storeVotes(votingResult).then(function(result) {
+			response.write("ok");
 
-		//notify all clients about new vote
-		events.emit('newVote');
+			//notify all clients about new vote
+			events.emit('result-sync');
+		});
 	});
 
 };
