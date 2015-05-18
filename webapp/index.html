@@ -21,20 +21,22 @@
             <h1>Wyniki wybórów</h1>
           </div>
         </div>
+            <div id="webapp-container"></div>
       </div>
-      
-		<div id="webapp-container"></div>
+
 
 		<!-- templates -->
         <script id="chartTpl" type="text/template">
+          <div class="row">
             <div id="chart">
                 <% _.forEach(data, function(model) { %>
-                <div class="chartElement">
-					<div class="chartElementName"><%= model.candidate %></div>
-					<div class="chartElementValue"><%= model.value %></div>
-				</div>
+                <div class="col-sm-4 text-center">
+        					<h2><%= model.candidate %> </h2>
+                  <h3 class="text-muted"><%= model.value %> </h3>
+        				</div>
                 <% }); %>
             </div>
+          </div>
         </script>
 
 		<script type="text/javascript" src="/lib/jquery.js"></script>
