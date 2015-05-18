@@ -1,17 +1,17 @@
-var api = {
+module.exports = function(db) {
+	return {
+		loadConstituencies: function(callback) {
 
-	loadConstituencies: function(callback) {
+			//callback()
+		},
 
-		callback()
-	},
+		loadCandidates: function(callback) {
 
-	loadCandidates: function(callback) {
+		},
 
-	},
+		saveConstituenceResult: function(result, callback) {
 
-	saveConstituenceResult: function(result, callback) {
-
+		}
 	}
-}
 
-exports = api;
+};
