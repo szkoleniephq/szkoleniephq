@@ -32,7 +32,7 @@
                 <% _.forEach(data, function(model) { %>
                 <div class="col-sm-4 text-center">
         					<h2><%= model.candidate %> </h2>
-                  <h3 class="text-muted"><%= model.value %> </h3>
+                  <h3 class="text-muted" data-percent="<%= model.percent %>"><%= model.value %> </h3>
         				</div>
                 <% }); %>
             </div>
