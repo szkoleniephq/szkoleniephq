@@ -1,1 +1,1 @@
-var constituency = new new ConstituencyCollection();
+var constituency = new ConstituencyCollection();
