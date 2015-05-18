@@ -29,9 +29,9 @@ module.exports = function(app, db, events) {
 			response.json(votingResult);
 			console.log('ook');
 			//notify all clients about new vote
-			setTimeout(function() {
-				events.emit('result-sync');
-			}, 1000)
+			//setTimeout(function() {
+			events.emit('result-sync');
+			//}, 1000)
 
 		});
 	});
