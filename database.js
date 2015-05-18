@@ -34,6 +34,19 @@ module.exports = {
         });
         return defered.promise;
     },
+    getCandidates: function() {
+        var defered = q.defer();
+        db_promise.promise.then(function(db) {
+            db.collection('candidates').find({}).toArray(function(err, data) {
+                if (err) {
+                    defered.reject();
+                    return;
+                }
+                defered.resolve(data);
+            });
+        });
+        return defered.promise;
+    },
     get: function() {
         return db;
     }
