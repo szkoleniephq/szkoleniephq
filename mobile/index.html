@@ -19,38 +19,41 @@
 		<section class="main">
         	<header>WYBORY 2016</header>
             <div id="webapp-container"></div>
-    
-            <!-- templates -->
-            <script id="okregiSelectTpl" type="text/template">
-                <label for="okregiSelect">Wybierz okręg</label>
-                <select id="okregiSelect">
-                    <option value="0">-- wybierz --</option>
-                    <% _.forEach(data, function(model) { %>
-                    <option value="<%= model.id %>"><%= model.name %></option>
-                    <% }); %>
-                </select>
-    
-                <div id="candidatesListContainer"></div>
-            </script>
-    
-            <script id="candidatesListTpl" type="text/template">
-                <h1>Lista kandydatów dla okręgu:</h1>
-				<h2><%= constituency %></h2>
-                <table class="table">
-                    <tr>
-                        <th>Kandydat</th>
-                        <th>Głosy</th>
-                    </tr>
-                    <% _.forEach(data, function(model) { %>
-                    <tr>
-                        <td><%= model.name %></td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <% }); %>
-                </table>
-            </script>
+
             <footer>Copyright 2015 © ProofHQ</footer>
         </section>
+
+        <!-- templates -->
+        <script id="okregiSelectTpl" type="text/template">
+            <label for="okregiSelect">Wybierz okręg</label>
+            <select id="okregiSelect">
+                <option value="0">-- wybierz --</option>
+                <% _.forEach(data, function(model) { %>
+                <option value="<%= model._id %>"><%= model.name %></option>
+                <% }); %>
+            </select>
+
+            <div id="candidatesListContainer"></div>
+        </script>
+
+        <script id="candidatesListTpl" type="text/template">
+            <h1>Lista kandydatów dla okręgu:</h1>
+			<h2><%= constituency %></h2>
+            <table class="table">
+                <tr>
+                    <th>Kandydat</th>
+                    <th>Głosy</th>
+                </tr>
+                <% _.forEach(data, function(model) { %>
+                <tr>
+                    <td><%= model.name %></td>
+                    <td><input class="candidate-input" id="<%= model._id %>" type="number"></td>
+                </tr>
+                <% }); %>
+            </table>
+
+            <button class="js-save-votes">Zapisz</button>
+        </script>
 
         <script type="text/javascript" src="/lib/jquery.js"></script>
         <script type="text/javascript" src="/lib/underscore-min.js"></script>
@@ -63,6 +66,9 @@
         <script type="text/javascript" src="/lib/models/Constituency.js"></script>
         <script type="text/javascript" src="/lib/collections/ConstituencyCollection.js"></script>
         <script type="text/javascript" src="/lib/views/MobileMainView.js"></script>
+
+        <script type="text/javascript" src="/lib/models/Votes.js"></script>
+        <script type="text/javascript" src="/lib/collections/VotesCollection.js"></script>
 
         <script type="text/javascript" src="index.js"></script>
 

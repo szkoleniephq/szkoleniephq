@@ -19,7 +19,7 @@ section.main {
 	max-width: 100%;
 	margin: 0 auto;
 	background-color: #efefef;
-	height: 100%;
+	min-height: 100%;
 	position: relative;
 }
 section.main header {
@@ -58,6 +58,17 @@ section.main header {
 }
 #webapp-container option {
 	padding: 10px 0;
+}
+#webapp-container button {
+	background-color: #669;
+	color: #fff;
+	border: none;
+	height: 40px;
+	width: 100px;
+	line-height: 36px;
+}
+#webapp-container button:hover {
+	background-color: #303;
 }
 #webapp-container table th {
 	font-size: 16px;

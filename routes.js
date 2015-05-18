@@ -19,9 +19,12 @@ module.exports = function(app, db, events) {
 	});
 
 	app.post('/saveResult', function(request, response) {
-		var votingResult = request.params.votingResult;
+
+		var votingResult = request.body.votingResult;
+		// console.log(votingResult);
+		// response.json(votingResult);
 		db.storeVotes(votingResult).then(function(result) {
-			response.write("ok");
+			response.json(votingResult);
 
 			//notify all clients about new vote
 			events.emit('result-sync');
