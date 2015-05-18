@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -9,6 +10,8 @@ var EventEmitter = require("events").EventEmitter;
 app.use('/webapp', express.static(__dirname + '/webapp'));
 app.use('/mobile', express.static(__dirname + '/mobile'));
 app.use('/lib', express.static(__dirname + '/lib'));
+
+app.use(bodyParser());
 
 var MongoClient = require('mongodb').MongoClient;
 app.set('port', (process.env.PORT || 5000));
