@@ -60,10 +60,13 @@ module.exports = {
         db_promise.promise.then(function(db) {
             for (var idx = 0; idx < votes.length; idx++) {
                 var vote = votes[idx];
+                console.log("Vote: ", vote);
                 db.collection('constituencies').find({
                     _id: ObjectID(vote.constituencyId)
                 }).count(function(err, count) {
+                    console.log("Count: ", count);
                     if (err || !count) {
+                        defered.resolve();
                         return;
                     }
                     db.collection('candidates').update({
@@ -82,6 +85,7 @@ module.exports = {
                 });
             }
             defered.resolve();
+            console.log("OK");
         });
         return defered.promise;
     },
