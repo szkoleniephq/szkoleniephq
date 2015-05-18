@@ -10,6 +10,7 @@ var Db = require('mongodb').Db,
 if (!db) {
     MongoClient.connect('mongodb://user:user@ds053139.mongolab.com:53139/db1', function(err, _db) {
         if (err) {
+            console.log('error', err);
             db_promise.reject();
             return;
         }
@@ -26,6 +27,7 @@ module.exports = {
         db_promise.promise.then(function(db) {
             db.collection('constituencies').find({}).toArray(function(err, data) {
                 if (err) {
+                    console.log('error', err);
                     defered.reject();
                     return;
                 }
@@ -37,8 +39,11 @@ module.exports = {
     getCandidates: function() {
         var defered = q.defer();
         db_promise.promise.then(function(db) {
-            db.collection('candidates').find({}).toArray(function(err, data) {
+            db.collection('candidates').find({}, {
+                //name: true
+            }).toArray(function(err, data) {
                 if (err) {
+                    console.log('error', err);
                     defered.reject();
                     return;
                 }
@@ -47,7 +52,36 @@ module.exports = {
         });
         return defered.promise;
     },
-    get: function() {
-        return db;
+
+    storeVotes: function(votes) {
+        db_promise.promise.then(function(db) {
+            for (var idx = 0; idx < votes.length; idx++) {
+                var vote = votes[idx];
+                db.collection('constituencies').find({
+                    _id: ObjectID(vote.constituencyId)
+                }).count(function(err, count) {
+                    if (err || !count) {
+                        return;
+                    }
+                    db.collection('candidates').update({
+                        _id: ObjectID(vote.candidateId)
+                    }, {
+                        $push: {
+                            votes: {
+                                constituencyId: vote.constituencyId,
+                                votes: vote.votes
+                            }
+                        },
+                        $inc: {
+                            result: vote.votes
+                        }
+                    });
+                });
+            }
+        });
+    },
+
+    getDb: function() {
+        return db_promise;
     }
 };
