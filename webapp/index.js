@@ -18,7 +18,7 @@ var results = new ResultCollection([
 
 var mainView = new WebappMainView({
 
-	collection: constituencies,
+	collection: results,
 	el: $('#webapp-container')
 
 });
